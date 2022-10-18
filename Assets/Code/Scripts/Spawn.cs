@@ -1,13 +1,17 @@
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Spawn : MonoBehaviour
 {
+    [SerializeField] private int _defaultPoolCapacity = 10;
+    [SerializeField] private int _maxPoolSize = 100;
     [SerializeField] private Cube _cube;
     [SerializeField] private ParticleSystem _spawnEffect;
     private float _cooldownTime = 1;
     private float _cubeSpeed = 1;
     private float _cubeLiveDistance = 1;
     private float _nextTimeToSpawn;
+    private ObjectPool<Cube> _pool;
 
     private Quaternion RandomRotation => Quaternion.LookRotation(Random.onUnitSphere);
 
@@ -44,20 +48,33 @@ public class Spawn : MonoBehaviour
         _cubeLiveDistance = distance;
     }
 
+    private void Start()
+    {
+        _pool = new ObjectPool<Cube>(
+            () => { return SpawnCube(_cubeSpeed, _cubeLiveDistance); },
+            cube => { cube.gameObject.SetActive(true); },
+            cube => { cube.gameObject.SetActive(false); },
+            cube => { Destroy(cube.gameObject); },
+            false,
+            _defaultPoolCapacity,
+            _maxPoolSize);
+    }
+
     private void Update()
     {
         if (Time.time > _nextTimeToSpawn)
         {
-            SpawnCube(_cubeSpeed, _cubeLiveDistance);
+            _pool.Get();
             _nextTimeToSpawn = Time.time + _cooldownTime;
         }
     }
 
-    private void SpawnCube(float cubeSpeed, float cubeLiveDistance)
+    private Cube SpawnCube(float cubeSpeed, float cubeLiveDistance)
     {
         Cube cube = Instantiate(_cube, transform.position, RandomRotation);
         cube.Init(cubeSpeed, cubeLiveDistance);
         PlaySpawnEffect();
+        return cube;
     }
 
     private void PlaySpawnEffect()

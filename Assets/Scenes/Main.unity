@@ -144,8 +144,8 @@ LightingSettings:
   m_LightmapMaxSize: 1024
   m_BakeResolution: 40
   m_Padding: 2
-  m_LightmapCompression: 3
-  m_AO: 0
+  m_LightmapCompression: 0
+  m_AO: 1
   m_AOMaxDistance: 1
   m_CompAOExponent: 1
   m_CompAOExponentDirect: 0
@@ -162,7 +162,7 @@ LightingSettings:
   m_FinalGather: 0
   m_FinalGatherRayCount: 256
   m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
+  m_PVRCulling: 0
   m_PVRSampling: 1
   m_PVRDirectSampleCount: 32
   m_PVRSampleCount: 512
@@ -172,7 +172,7 @@ LightingSettings:
   m_PVRBounces: 2
   m_PVRMinBounces: 1
   m_PVREnvironmentMIS: 1
-  m_PVRFilteringMode: 1
+  m_PVRFilteringMode: 0
   m_PVRDenoiserTypeDirect: 1
   m_PVRDenoiserTypeIndirect: 1
   m_PVRDenoiserTypeAO: 1
@@ -892,7 +892,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36882
+  m_Name: pb_Mesh48416
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1391,10 +1391,10 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -5675,6 +5675,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d593a85dc7ffada4bb1024b54df59db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _defaultPoolCapacity: 10
+  _maxPoolSize: 10000
   _cube: {fileID: -4007940822808037932, guid: 4dd7ae710570f3a4881ac2683d138e10, type: 3}
   _spawnEffect: {fileID: 198856240541606180}
 --- !u!4 &4865136083622538
